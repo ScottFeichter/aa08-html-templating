@@ -88,12 +88,26 @@ const server = http.createServer((req, res) => {
 
     // Phase 1: GET /dogs
     if (req.method === 'GET' && req.url === '/dogs') {
-      // Your code here 
+      // Your code here
+      // serve the dogs.html
+      // replace the dogsList variable with a string of 'li' html tags containing names of dogs
+      const htmlPage = fs.readFileSync("./views/dogs.html", 'utf-8');
+
+      const contentType = getContentType();
+
+      const resBody = htmlPage;
+
+      res.statusCode = 302;
+      res.setHeader('Content-Type', contentType);
+      res.end(reqBody);
+
+
+
     }
 
     // Phase 2: GET /dogs/new
     if (req.method === 'GET' && req.url === '/dogs/new') {
-      // Your code here 
+      // Your code here
     }
 
     // Phase 3: GET /dogs/:dogId
@@ -102,13 +116,13 @@ const server = http.createServer((req, res) => {
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId === Number(dogId));
-        // Your code here 
+        // Your code here
       }
     }
 
     // Phase 4: POST /dogs
     if (req.method === 'POST' && req.url === '/dogs') {
-      // Your code here 
+      // Your code here
     }
 
     // Phase 5: GET /dogs/:dogId/edit
@@ -117,7 +131,7 @@ const server = http.createServer((req, res) => {
       if (urlParts.length === 4 && urlParts[3] === 'edit') {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId === Number(dogId));
-        // Your code here 
+        // Your code here
       }
     }
 
@@ -127,7 +141,7 @@ const server = http.createServer((req, res) => {
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId === Number(dogId));
-        // Your code here 
+        // Your code here
       }
     }
 
@@ -143,6 +157,6 @@ const server = http.createServer((req, res) => {
   });
 });
 
-const port = 5000;
+const port = 5001;
 
 server.listen(port, () => console.log('Server is listening on port', port));
